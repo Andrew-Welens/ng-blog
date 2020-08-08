@@ -1,4 +1,8 @@
 {
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "allowJs": true
+  },
   "extends": "tslint:recommended",
   "rules": {
     "align": {
