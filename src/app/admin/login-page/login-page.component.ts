@@ -27,6 +27,8 @@ export class LoginPageComponent implements OnInit {
       .subscribe((params: Params) => {
         if (params['loginAgain']) {
           this.msg = 'Пожалуйста, авторизуйтесь чтобы продолжить'
+        } else if (params['authFailed']) {
+          this.msg = 'Сессия завершена'
         }
       })
 

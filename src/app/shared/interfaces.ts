@@ -16,3 +16,7 @@ export interface IPost {
   author: string
   date: Date
 }
+
+export interface IFbResponse {
+  name: string
+}
