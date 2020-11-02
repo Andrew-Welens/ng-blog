@@ -1,8 +1,10 @@
 export interface IUser {
-  email: string;
-  password: string;
+  email: string
+  password: string
+  returnSecureToken?: boolean
 }
 
 export interface IFireBaseAuth {
-  idToken: string;
+  idToken: string
+  expiresIn: string
 }

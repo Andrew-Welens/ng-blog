@@ -12,24 +12,39 @@ export class AuthService {
   }
 
   get token(): string {
-    return ''
+    const expDate = new Date(localStorage.getItem('token-exp'))
+    if (new Date() > expDate) {
+      this.logOut()
+      return null
+    }
+    return localStorage.getItem('token')
   }
 
   logIn(user: IUser): Observable<any> {
-    return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
+    user.returnSecureToken = true
+    return this.http.post(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,
+      user)
       .pipe(
         tap(this.setToken)
       )
   }
 
   logOut() {
+    this.setToken(null)
   }
 
   isAuth(): boolean {
     return !!this.token
   }
 
-  private setToken(response: IFireBaseAuth) {
-    console.log(response)
+  private setToken(response: IFireBaseAuth | null) {
+    if (response) {
+      const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000)
+      localStorage.setItem('token', response.idToken)
+      localStorage.setItem('token-exp', expDate.toString())
+    } else {
+      localStorage.clear()
+    }
   }
 }
