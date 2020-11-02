@@ -22,9 +22,7 @@ export class CreatePageComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.invalid) {
-      return
-    }
+    if (this.form.invalid) return
 
     const post: IPost = {
       title: this.form.value.title,
