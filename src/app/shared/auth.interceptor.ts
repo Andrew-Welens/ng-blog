@@ -19,7 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
   ) {
   }
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this.auth.isAuth()) {
       request = request.clone({
         setParams: {
@@ -29,7 +29,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
     return next.handle(request)
       .pipe(
-        tap(() => console.log('www')),
+        tap(() => console.log('HTTP_INTERCEPTORS')),
         catchError((error: HttpErrorResponse) => {
           if (error.status === 401) {
             this.auth.logOut()
