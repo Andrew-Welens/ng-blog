@@ -9,7 +9,8 @@ import {EditPageComponent} from './edit-page/edit-page.component'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import {SharedModule} from '../shared/shared.module'
 import {AuthGuardService} from './shared/services/auth.guard.service';
-import { SearchPipe } from './shared/pipe/search.pipe'
+import { SearchPipe } from './shared/pipe/search.pipe';
+import { AlertComponent } from './shared/components/alert/alert.component'
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SearchPipe } from './shared/pipe/search.pipe'
     DashboardPageComponent,
     CreatePageComponent,
     EditPageComponent,
-    SearchPipe],
+    SearchPipe,
+    AlertComponent],
   imports: [
     CommonModule,
     FormsModule,

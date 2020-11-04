@@ -41,7 +41,24 @@ export class PostService {
       )
   }
 
+  getId(id: string): Observable<IPost> {
+    return this.http.get<IPost>(`${environment.dbUrl}/posts/${id}.json`)
+      .pipe(
+        map((post: IPost) => {
+          return {
+            ...post,
+            id,
+            date: new Date(post.date)
+          }
+        })
+      )
+  }
+
   remove(id: string): Observable<void> {
     return this.http.delete<void>(`${environment.dbUrl}posts/${id}.json`)
+  }
+
+  update(post: IPost): Observable<IPost> {
+    return this.http.patch<IPost>(`${environment.dbUrl}/posts/${post.id}.json`, post)
   }
 }
