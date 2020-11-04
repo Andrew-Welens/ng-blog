@@ -1,16 +1,16 @@
 <div class="card">
   <div class="card-header">
-    <h2>Post title</h2>
+    <h2>{{post.title}}</h2>
 
-    <small>666</small>
+    <small>{{post.date | date:'short': null: 'ru'}}</small>
   </div>
 
   <div>
-    <small>Welens</small>
+    <small>{{post.author}}</small>
   </div>
 
   <button
-    [routerLink]="['/post', 333]"
+    [routerLink]="['/post', post.id]"
     class="btn btn-dark">
     Открыть
   </button>
