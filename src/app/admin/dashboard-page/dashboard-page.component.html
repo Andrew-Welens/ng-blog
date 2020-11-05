@@ -1,4 +1,4 @@
-<div *ngIf="posts.length; else loading">
+<div *ngIf="posts != null && posts.length; else loading">
   <div class="form-control">
     <input [(ngModel)]="search" type="text" placeholder="Найти пост...">
   </div>
@@ -31,7 +31,6 @@
     </tbody>
   </table>
 </div>
-
 
 <ng-template #loading>
   <p class="text-center">Идет загрузка...</p>

@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http'
 import {Observable} from 'rxjs'
 import {IFbResponse, IPost} from '../../../shared/interfaces'
 import {environment} from '../../../../environments/environment'
-import {map} from 'rxjs/operators'
+import {map, tap} from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
@@ -30,13 +30,15 @@ export class PostService {
     return this.http.get(`${environment.dbUrl}posts.json`)
       .pipe(
         map((response: { [key: string]: any }) => {
-          return Object
-            .keys(response)
-            .map(key => ({
-              ...response[key],
-              id: key,
-              date: new Date(response[key].date)
-            }))
+          if (response) {
+            return Object
+              .keys(response)
+              .map(key => ({
+                ...response[key],
+                id: key,
+                date: new Date(response[key].date)
+              }))
+          }
         })
       )
   }
